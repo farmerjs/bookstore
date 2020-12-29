@@ -1,3 +1,4 @@
+using Autofac;
 using Book.Framework.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -53,6 +54,17 @@ namespace Book.Web
             //        await context.Response.WriteAsync("Hello World!");
             //    });
             //});
+        }
+
+        /// <summary>
+        /// ConfigureContainer is where you can register things directly
+        /// with Autofac. This runs after ConfigureServices so the things
+        /// here will override registrations made in ConfigureServices.
+        /// </summary>
+        /// <param name="builder"></param>
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.ConfigureContainer(Configuration);
         }
     }
 }

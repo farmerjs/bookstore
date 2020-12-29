@@ -3,7 +3,9 @@ using Book.Core.Configuration;
 using Book.Core.Data;
 using Book.Core.Infrastructure;
 using Book.Core.Infrastructure.DependencyManagement;
+using Book.Core.Routing;
 using Book.Domain.Data;
+using Book.Framework.Mvc.Routing;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -89,7 +91,7 @@ namespace Book.Framework.Infrastructure
 
         private void RegisterFramework(ContainerBuilder builder)
         {
-           
+            builder.RegisterType<RoutePublisher>().As<IRoutePublisher>().SingleInstance();
         }
 
     }

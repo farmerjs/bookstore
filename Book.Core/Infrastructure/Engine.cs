@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using AutoMapper;
 using Book.Core.Configuration;
 using Book.Core.Infrastructure.DependencyManagement;
 using Book.Domain.MongoDB;
@@ -117,17 +116,17 @@ namespace Book.Core.Infrastructure
         {
             //find startup configurations provided by other assemblies
             var typeFinder = new WebAppTypeFinder();
-            //var startupConfigurations = typeFinder.FindClassesOfType<IGrandStartup>();
+            var startupConfigurations = typeFinder.FindClassesOfType<IGrandStartup>();
 
             //create and sort instances of startup configurations
-            //var instances = startupConfigurations
-            //    //.Where(startup => PluginManager.FindPlugin(startup).Return(plugin => plugin.Installed, true)) //ignore not installed plugins
-            //    .Select(startup => (IGrandStartup)Activator.CreateInstance(startup))
-            //    .OrderBy(startup => startup.Order);
+            var instances = startupConfigurations
+                //.Where(startup => PluginManager.FindPlugin(startup).Return(plugin => plugin.Installed, true)) //ignore not installed plugins
+                .Select(startup => (IGrandStartup)Activator.CreateInstance(startup))
+                .OrderBy(startup => startup.Order);
 
             //configure services
-            //foreach (var instance in instances)
-            //    instance.ConfigureServices(services, configuration);
+            foreach (var instance in instances)
+                instance.ConfigureServices(services, configuration);
 
             //register mapper configurations
             AddAutoMapper(typeFinder);
@@ -153,17 +152,17 @@ namespace Book.Core.Infrastructure
         {
             //find startup configurations provided by other assemblies
             var typeFinder = new WebAppTypeFinder();
-            //var startupConfigurations = typeFinder.FindClassesOfType<IGrandStartup>();
+            var startupConfigurations = typeFinder.FindClassesOfType<IGrandStartup>();
 
             ////create and sort instances of startup configurations
-            //var instances = startupConfigurations
-            //    //.Where(startup => PluginManager.FindPlugin(startup).Return(plugin => plugin.Installed, true)) //ignore not installed plugins
-            //    .Select(startup => (IGrandStartup)Activator.CreateInstance(startup))
-            //    .OrderBy(startup => startup.Order);
+            var instances = startupConfigurations
+                //.Where(startup => PluginManager.FindPlugin(startup).Return(plugin => plugin.Installed, true)) //ignore not installed plugins
+                .Select(startup => (IGrandStartup)Activator.CreateInstance(startup))
+                .OrderBy(startup => startup.Order);
 
             //configure request pipeline
-            //foreach (var instance in instances)
-            //    instance.Configure(application, webHostEnvironment);
+            foreach (var instance in instances)
+                instance.Configure(application, webHostEnvironment);
         }
 
         /// <summary>
