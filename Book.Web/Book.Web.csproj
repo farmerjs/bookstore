@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Book.Core\Book.Core.csproj" />
+    <ProjectReference Include="..\Book.Domain\Book.Domain.csproj" />
+    <ProjectReference Include="..\Book.Framework\Book.Framework.csproj" />
+    <ProjectReference Include="..\Book.Service\Book.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Views\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+</Project>
